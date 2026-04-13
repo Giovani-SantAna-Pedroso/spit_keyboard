@@ -1,3 +1,4 @@
+
 try:
     from typing import Callable, Optional, Tuple
 except ImportError:
@@ -150,58 +151,33 @@ def maybe_make_mod_key(candidate: str) -> Optional[Key]:
         if candidate in names:
             return make_key(names=names, constructor=ModifierKey, code=code)
 
-def maybe_make_abnt2_key(candidate: str) -> Optional[Key]:
-    codes = (
-        # Ç key (same as semicolon in HID)
-        (51, ('CCEDILLA', 'C_CEDILLA', 'Ç')),
-
-        # Tilde / circumflex key
-        (0x34, ('TILDE', 'TILD_BR', '~')),
-
-        (53, ('CIRCUMFLEX', 'CIRC_BR', '^')),
-        
-
-        # ABNT2 extra key (<> | \)
-        (100, ('NON_US_BACKSLASH', 'NUBS', 'PIPE_BR')),
-
-        # Slash / question (ABNT2 position differs)
-        (56, ('SLASH_BR', '/')),
-    )
-
-    for code, names in codes:
-        if candidate in names:
-            return make_key(names=names, constructor=KeyboardKey, code=code)
 
 def maybe_make_more_ascii(candidate: str) -> Optional[Key]:
+     
+
+
     codes = (
         (40, ('ENTER', 'ENT', '\n')),
         (41, ('ESCAPE', 'ESC')),
         (42, ('BACKSPACE', 'BSPACE', 'BSPC', 'BKSP')),
         (43, ('TAB', '\t')),
         (44, ('SPACE', 'SPC', ' ')),
-
         (45, ('MINUS', 'MINS', '-')),
         (46, ('EQUAL', 'EQL', '=')),
-
-        (0x30, ('LBRACKET', 'LBRC', '[')),
-        (0x31, ('RBRACKET', 'RBRC', ']')),
-
+        (47, ('LBRACKET', 'LBRC', '[')),
+        (48, ('RBRACKET', 'RBRC', ']')),
         (49, ('BACKSLASH', 'BSLASH', 'BSLS', '\\')),
-
-        # ABNT2 aliases added here 👇
-       (0x38, ('SEMICOLON', 'SCOLON', 'SCLN', ';', 'Ç')),
-        (53, ('QUOTE', 'QUOT', "'", 'APOSTROPHE')),
-        (47, ('GRAVE', 'GRV', '`')),
-        
+        (51, ('SEMICOLON', 'SCOLON', 'SCLN', ';')),
+        (52, ('QUOTE', 'QUOT', "'")),
+        (53, ('GRAVE', 'GRV', 'ZKHK', '`')),
         (54, ('COMMA', 'COMM', ',')),
-        (55, ('DOT', 'PERIOD', '.')),
-        (135, ('SLASH', 'SLSH', '/', 'QUESTION')),
+        (55, ('DOT', '.')),
+        (56, ('SLASH', 'SLSH', '/')),
     )
 
     for code, names in codes:
         if candidate in names:
             return make_key(names=names, constructor=KeyboardKey, code=code)
-
 
 
 def maybe_make_fn_key(candidate: str) -> Optional[Key]:
@@ -297,27 +273,27 @@ def maybe_make_numpad_key(candidate: str) -> Optional[Key]:
 
 def maybe_make_shifted_key(candidate: str) -> Optional[Key]:
     codes = (
-        ('1', ('EXCLAIM', '!')),
+        ('1', ('EXCLAIM', 'EXLM', '!')),
         ('2', ('AT', '@')),
-        ('3', ('HASH', '#')),
-        ('4', ('DOLLAR', '$')),
-        ('5', ('PERCENT', '%')),
-        ('6', ('CIRCUMFLEX', '^')),
-        ('7', ('AMPERSAND', '&')),
-        ('8', ('ASTERISK', '*')),
-        ('9', ('LEFT_PAREN', '(')),
-        ('0', ('RIGHT_PAREN', ')')),
-
-        ('-', ('UNDERSCORE', '_')),
+        ('3', ('HASH', 'POUND', '#')),
+        ('4', ('DOLLAR', 'DLR', '$')),
+        ('5', ('PERCENT', 'PERC', '%')),
+        ('6', ('CIRCUMFLEX', 'CIRC', '^')),
+        ('7', ('AMPERSAND', 'AMPR', '&')),
+        ('8', ('ASTERISK', 'ASTR', '*')),
+        ('9', ('LEFT_PAREN', 'LPRN', '(')),
+        ('0', ('RIGHT_PAREN', 'RPRN', ')')),
+        ('-', ('UNDERSCORE', 'UNDS', '_')),
         ('=', ('PLUS', '+')),
-
-        # ABNT2 differences 👇
-        (';', ('COLON', ':')),
-        ("'", ('DOUBLE_QUOTE', '"')),
-        (',', ('LESS_THAN', '<')),
-        ('.', ('GREATER_THAN', '>')),
-        ('/', ('QUESTION', '?')),
+        ('[', ('LEFT_CURLY_BRACE', 'LCBR', '{')),
+        (']', ('RIGHT_CURLY_BRACE', 'RCBR', '}')),
         ('\\', ('PIPE', '|')),
+        (';', ('COLON', 'COLN', ':')),
+        ("'", ('DOUBLE_QUOTE', 'DQUO', 'DQT', '"')),
+        ('`', ('TILDE', 'TILD', '~')),
+        (',', ('LEFT_ANGLE_BRACKET', 'LABK', '<')),
+        ('.', ('RIGHT_ANGLE_BRACKET', 'RABK', '>')),
+        ('/', ('QUESTION', 'QUES', '?')),
     )
 
     for unshifted, names in codes:
@@ -328,7 +304,6 @@ def maybe_make_shifted_key(candidate: str) -> Optional[Key]:
                 code=KC[unshifted],
                 modifier=KC.LSFT,
             )
-
 
 
 def maybe_make_bkdl_key(candidate: str) -> Optional[Key]:
@@ -379,7 +354,6 @@ KEY_GENERATORS = (
     maybe_make_mod_key,
     # More ASCII standard keys
     maybe_make_more_ascii,
-    maybe_make_abnt2_key,
     # Function Keys
     maybe_make_fn_key,
     # Lock Keys, Navigation, etc.
