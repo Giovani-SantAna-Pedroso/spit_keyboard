@@ -41,6 +41,8 @@ device_name = str(getmount('/').label)
 # form the orange keyboard
 if "_O_" in device_name:
     keyboard.row_pins = (board.GP16, board.GP17, board.GP18, board.GP19)             # Rows
+else:
+    keyboard.row_pins = (board.GP19, board.GP18, board.GP17, board.GP16)
 
 # col
 if side == SplitSide.RIGHT:
@@ -163,64 +165,76 @@ if "_O_" in device_name:
 else: 
 # Keymap
     keyboard.keymap = [
-            # Default - 0 - OK
-            [
-                # Row 1
-                KC.TD(KC.Q, KC.ESC), KC.W, KC.E, KC.R, KC.T,
-                KC.Y, KC.U, KC.I, KC.O, KC.P,
-
-                # Row 2
-                KC.TD(KC.A, KC.CAPS), KC.S, KC.D, KC.F, KC.G,
-                KC.H, KC.J, KC.K, KC.L, KC_CES,
-
-                # Row 3
-                Z_WI, KC.HT(KC.X, KC.LALT), KC.HT(KC.C, KC.LCTRL), V_SH, KC.B, 
-                KC.N, KC.HT(KC.M, KC.RSHIFT), KC.HT(KC.COMM, KC.RCTRL), KC.HT(KC.DOT, KC.RALT), KC.HT(KC_SCLN, KC.RGUI),
-
-                # Tumb cluster
-                # XXXX, XXXX, KC.SPC, KC.BSPC, KC.TAB,
-                XXXX, XXXX, KC.SPC, KC.BSPC, KC.LT(1, KC.TAB),
-                # XXXX, XXXX, KC.SPC, KC.BSPC, KC.MT(KC.TAB,KC.MO(1)),
-                KC.LT(2, KC.ENT), KC.SPC, XXXX, XXXX, XXXX, 
-            ],
-            
-            # Num n Symblos - 1 - OK
-            [
-
-                KC.N1, KC.N2, KC.N3, KC.N4, KC.N5,
-                KC.N6, KC.N7, KC.N8, KC.N9, KC.N0,
-
-                KC_QUO, XXXX, XXXX, XXXX, XXXX,
-                XXXX,  KC.MINS, KC.EQL, KC.LBRC, KC.RBRC,
-                
-                KC.HT(KC_RBRC, KC.LGUI), KC.HT(CTR_Z, KC.LALT),  KC.HT(CTR_C, KC.LCTRL), KC.HT(CTR_V, KC.LSHIFT), XXXX,
-                # XXXX, KC.HT(KC_ASC, KC.RSHIFT),  KC.HT(XXXX, KC.RCTRL), KC.HT(KC.X, KC.RALT), KC.HT(KC_RBRC, KC.LGUI),
-                XXXX, KC.HT(KC_ASC, KC.RSHIFT),  KC.HT(KC.TILDE, KC.RCTRL), KC.HT(KC_SLASH, KC.RALT), KC.HT(KC_RBRC, KC.LGUI),
-
-                
+    # Default - 0
+    [
+        # Row 1 (era Row 3)
 
 
-                XXXX, XXXX, KC.SPC, KC.BSPC, KC.TAB,
-                KC.ENT, KC.SPC, XXXX, XXXX, XXXX, 
-            ], 
+        KC.TD(KC.Q, KC.ESC),KC.W,KC.E,KC.R,KC.T,
+        KC.Y, KC.U, KC.I, KC.O, KC.P,
+
+        # Row 2 (permanece)
+        KC.TD(KC.A, KC.CAPS),KC.S,KC.D,KC.F,KC.G,
+        KC.H, KC.J, KC.K, KC.L, KC.CCEDILLA,
+
+        # Row 3 (era Row 1)
+        KC.HT(KC.Z, KC.LGUI),KC.HT(KC.X, KC.LALT),KC.HT(KC.C, KC.LCTRL),KC.HT(KC.V, KC.LSHIFT),KC.B,
+
+        KC.N, KC.HT(KC.M, KC.RSHIFT), KC.HT(KC.COMM, KC.RCTRL), KC.HT(KC.DOT, KC.RALT), KC.HT(KC.SEMICOLON, KC.RGUI),
+
+        # Thumb
+        XXXX,XXXX,KC.SPC,KC.BSPC,KC.LT(1, KC.TAB),
+        KC.LT(2,KC.ENT), KC.SPC, XXXX, XXXX, XXXX,
+    ],
+
+    # Layer 1
+    [
+        # Row 1 (era Row 3)
+
+        KC.N1,KC.N2, KC.N3,KC.N4,KC.N5,
+        KC.N6, KC.N7, KC.N8, KC.N9, KC.N0,
+
+        # Row 2
 
 
-            # Functions - 2
-            [
-                KC.F1, KC.F2, KC.F3, KC.F4, KC.F5,
-                KC.F6, KC.F7, KC.F8, KC.F9, KC.F10,
+        KC.QUOTE,        KC.NUBS,XXXX,XXXX,XXXX,
+        XXXX, KC.MINS, KC.EQL, KC.LBRC, KC.RBRC,
 
-                KC.CAPS, XXXX, KC.DEL, KC.ESC, XXXX,
-                KC.LEFT,  KC.DOWN, KC.UP, KC.RIGHT, KC.F11,
+        # Row 3 (era Row 1)
+        KC.HT(KC.NON_US_BACKSLASH, KC.LGUI),KC.HT(CTR_Z, KC.LALT),KC.HT(CTR_C, KC.LCTRL),KC.HT(CTR_V, KC.LSHIFT),XXXX,
 
-                XXXX, XXXX, XXXX, XXXX, XXXX,
-                XXXX, KC_ASC, XXXX, XXXX, KC.F12,
+        XXXX, KC.HT(KC.GRAVE, KC.RSHIFT), KC.HT(KC.TILDE, KC.RCTRL), KC.HT(KC.SLASH, KC.RALT), KC.HT(XXXX, KC.LGUI),
 
-                XXXX, XXXX, KC.AUDIO_MUTE, KC.AUDIO_VOL_DOWN, KC.AUDIO_VOL_UP,
-                XXXX, XXXX, XXXX, XXXX, XXXX, 
-            ]
+        # Thumb
 
+        XXXX,XXXX,KC.SPC,KC.BSPC,KC.TAB,
+        KC.ENT, KC.SPC, XXXX, XXXX, XXXX,
+    ],
+
+    # Layer 2
+    [
+        # Row 1 (era Row 3)
+
+        KC.F1,KC.F2,KC.F3,KC.F4,KC.F5, 
+        KC.F6, KC.F7, KC.F8, KC.F9, KC.F10,
+
+        # Row 2
+        KC.CAPS,XXXX,KC.DEL,KC.ESC,XXXX,
+        KC.LEFT, KC.DOWN, KC.UP, KC.RIGHT, KC.F11,
+
+        # Row 3 (era Row 1)
+        XXXX, XXXX, XXXX, XXXX, XXXX,
+        XXXX, XXXX, XXXX, KC.PRINT_SCREEN, KC.F12,
+
+        # Thumb
+        XXXX,XXXX,KC.AUDIO_MUTE,KC.AUDIO_VOL_DOWN,KC.AUDIO_VOL_UP,
+
+
+        XXXX, XXXX, XXXX, XXXX, XXXX,
     ]
+]
+
+
 
 
 print("strating thte keyboard")
