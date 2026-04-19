@@ -134,11 +134,10 @@ if "_O_" in device_name:
                 KC.N0, KC.N9, KC.N8, KC.N7, KC.N6, # ok
 
                 KC.QUOTE, KC.NUBS, XXXX, XXXX, XXXX,
-                KC.RBRC, KC.LBRC, KC.EQL, KC.MINS, XXXX,
-
-            
+                KC.LBRC, XXXX, KC.EQL, KC.MINS, XXXX,
+                
                 KC.HT(KC.NON_US_BACKSLASH  , KC.LGUI), KC.HT(CTR_Z, KC.LALT),  KC.HT(CTR_C, KC.LCTRL), KC.HT(CTR_V, KC.LSHIFT), XXXX,
-                KC.HT(XXXX, KC.LGUI), KC.HT(KC.SLASH, KC.RALT), KC.HT(KC.TILDE, KC.RCTRL), KC.HT(KC.GRAVE, KC.RSHIFT),XXXX,
+                KC.HT(KC.RBRC, KC.LGUI), KC.HT(KC.SLASH, KC.RALT), KC.HT(KC.TILDE, KC.RCTRL), KC.HT(KC.GRAVE, KC.RSHIFT),XXXX,
 
             
                 XXXX, XXXX, KC.SPC, KC.BSPC, KC.TAB,
